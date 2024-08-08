@@ -1,6 +1,7 @@
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scena.layout.HBox;
 import javafx,scene.layout.VBox;
@@ -15,8 +16,9 @@ public class ProjectMocha extends Application{
         BorderPane root = new BorderPane();
 
         VBox leftPane = new VBox();
-        Label explorerLabel = new Label("Explorador");
-        leftPane.getChildren().add(explorerLabel);
+        TexteArea textArea = new TextArea();
+        textArea.setPromptText("Escribe aqui...");
+        leftPane.getChildren().add(textArea);
 
         VBox centerPane = new VBox();
         Label mainWindowLabel = new Label("Ventana principal");
