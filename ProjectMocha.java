@@ -1,5 +1,6 @@
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -26,6 +27,12 @@ public class ProjectMocha extends Application{
         TexteArea textArea = new TextArea();
         textArea.setPromptText("Escribe aqui...");
         centerPane.getChildren().add(textArea);
+
+        Button getTextButton = new Button("Save");
+        getTextButton.setOnAction(e -> {
+            String contenido = textArea.getText();
+            System.out.println(contenido);
+        });
 
         MenuBar menuBar = new MenuBar();
 
