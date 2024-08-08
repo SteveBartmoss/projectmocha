@@ -13,7 +13,7 @@ public class ProjectMocha extends Application{
 
         root.getChildren().add(new Label("hola"));
 
-        Scene scene = new Scene(root, 300, 250);
+        Scene scene = new Scene(root, 800, 600);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
