@@ -8,9 +8,15 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scena.layout.HBox;
-import javafx,scene.layout.VBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class ProjectMocha extends Application{
 
@@ -30,9 +36,20 @@ public class ProjectMocha extends Application{
 
         Button getTextButton = new Button("Save");
         getTextButton.setOnAction(e -> {
+
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Guardas Archivo");
+
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files","*.txt"));
+
+            File file = fileChooser.showSaveDialog(primaryStage);
+            if(file != null){
+                guardarArchivo(file, textArea.getText());
+            }
             String contenido = textArea.getText();
             System.out.println(contenido);
         });
+        centerPane.getChildren().add(getTextButton);
 
         MenuBar menuBar = new MenuBar();
 
@@ -61,6 +78,14 @@ public class ProjectMocha extends Application{
         Scene scene = new Scene(root, 800, 600);
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    private void guardarArchivo(File file, String content){
+        try(BufferedWriter writer = new Bufferedwriter(new FileWriter(file))){
+            writer.write(context);
+        } catch(IOException ex){
+            System.out.println("Error al guardar el archivo: " + ex.getMessage());
+        }
     }
 
     public static void main(String[] args){
