@@ -76,10 +76,15 @@ public class ProjectMocha extends Application{
         topPane.getChildren().add(menuBar);
         topPane.getChildren().add(getTextButton);
 
+        VBox buttonPane = new VBox();
+        Label buttonLabel = new Label("Barra inferrior");
+        buttonPane.getChildren().add(buttonLabel);
+
         root.setLeft(leftPane);
         root.setCenter(centerPane);
         root.setTop(topPane);
-
+        root.setButton(buttonPana);
+        
         Scene scene = new Scene(root, 800, 600);
 
         scene.getStylesheets().add(getClass().getResource("darkTheme.css").toExternalForm());
