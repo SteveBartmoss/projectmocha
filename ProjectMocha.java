@@ -7,7 +7,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
-import javafx.scena.layout.HBox;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.scene.layout.StackPane;
@@ -30,7 +30,7 @@ public class ProjectMocha extends Application{
         leftPane.getChildren().add(explorerLabel);
 
         VBox centerPane = new VBox();
-        TexteArea textArea = new TextArea();
+        TextArea textArea = new TextArea();
         textArea.setPromptText("Escribe aqui...");
         centerPane.getChildren().add(textArea);
 
@@ -81,8 +81,8 @@ public class ProjectMocha extends Application{
     }
 
     private void guardarArchivo(File file, String content){
-        try(BufferedWriter writer = new Bufferedwriter(new FileWriter(file))){
-            writer.write(context);
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(file))){
+            writer.write(content);
         } catch(IOException ex){
             System.out.println("Error al guardar el archivo: " + ex.getMessage());
         }
