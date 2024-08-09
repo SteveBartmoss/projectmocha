@@ -8,6 +8,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.scene.layout.StackPane;
@@ -29,9 +30,11 @@ public class ProjectMocha extends Application{
         Label explorerLabel = new Label("Explorador");
         leftPane.getChildren().add(explorerLabel);
 
-        VBox centerPane = new VBox();
         TextArea textArea = new TextArea();
         textArea.setPromptText("Escribe aqui...");
+        VBox.setVgrow(textArea, Priority.ALWAYS);
+        VBox centerPane = new VBox();
+        
         centerPane.getChildren().add(textArea);
 
         Button getTextButton = new Button("Save");
@@ -49,7 +52,8 @@ public class ProjectMocha extends Application{
             String contenido = textArea.getText();
             System.out.println(contenido);
         });
-        centerPane.getChildren().add(getTextButton);
+
+        //centerPane.getChildren().add(getTextButton);
 
         MenuBar menuBar = new MenuBar();
 
@@ -70,6 +74,7 @@ public class ProjectMocha extends Application{
         HBox topPane = new HBox();
         
         topPane.getChildren().add(menuBar);
+        topPane.getChildren().add(getTextButton);
 
         root.setLeft(leftPane);
         root.setCenter(centerPane);
