@@ -1,4 +1,6 @@
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -10,6 +12,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -20,6 +24,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class ProjectMocha extends Application{
+
+    private TextFlow lineNumbers;
 
     public void start(Stage primaryStage){
         primaryStage.setTitle("mochaEditor");
@@ -35,7 +41,12 @@ public class ProjectMocha extends Application{
         VBox.setVgrow(textArea, Priority.ALWAYS);
         VBox centerPane = new VBox();
         
-        centerPane.getChildren().add(textArea);
+        lineNumbers = new TextFlow();
+        VBox.setVgrow(lineNumbers, Priority.ALWAYS);
+
+        HBox textAreaWhitLineNumbers = new HBox();
+        textAreaWhitLineNumbers.getChildren().addAll(lineNumbers,textArea)
+        centerPane.getChildren().add(textAreaWhitLineNumbers);
 
         Button getTextButton = new Button("Save");
         getTextButton.setOnAction(e -> {
@@ -72,7 +83,6 @@ public class ProjectMocha extends Application{
         menuBar.getMenus().addAll(fileMenu, editMenu, helpMenu);
 
         HBox topPane = new HBox();
-        
         topPane.getChildren().add(menuBar);
         topPane.getChildren().add(getTextButton);
 
@@ -84,12 +94,25 @@ public class ProjectMocha extends Application{
         root.setCenter(centerPane);
         root.setTop(topPane);
         root.setButton(buttonPana);
+
+        textArea.textProperty().addListener((obs, oldtext, newText)->updateLineNumbers(textArea));
+        textArea.scrollTopProperty().addListener((observable, oldValue, newValue)->updateLineNumbers(textArea));
         
         Scene scene = new Scene(root, 800, 600);
 
         scene.getStylesheets().add(getClass().getResource("darkTheme.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    private void updateLineNumbers(TextArea textArea){
+        String[] lines = textArea.getText().split("\n");
+        StringBuilder lineNumbersText = new StringBuilder();
+        for(int i=1; i <= lines.length; i++;){
+            lineNumbersText.append(i).append("\n");
+        }
+        lineNumbers.getChildren().clear();
+        lineNumbers.getChildren().add(new Text(lineNumbersText.toString()));
     }
 
     private void guardarArchivo(File file, String content){
