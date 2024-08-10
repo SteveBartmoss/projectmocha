@@ -47,7 +47,7 @@ public class ProjectMocha extends Application{
         getTextButton.setOnAction(e -> {
 
             FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Guardas Archivo");
+            fileChooser.setTitle("Guardar Archivo");
 
             fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files","*.txt"));
 
@@ -70,8 +70,11 @@ public class ProjectMocha extends Application{
         MenuItem saveFile = new MenuItem("Guardar");
         MenuItem exit = new MenuItem("Salir");
 
+        MenuItem about = new MenuItem("About");
+
 
         fileMenu.getItems().addAll(newFile, openFile, saveFile, exit);
+        helpMenu.getItems().addAll(about);
 
         menuBar.getMenus().addAll(fileMenu, editMenu, helpMenu);
 
