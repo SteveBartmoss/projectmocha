@@ -45,7 +45,7 @@ public class ProjectMocha extends Application{
         VBox.setVgrow(lineNumbers, Priority.ALWAYS);
 
         HBox textAreaWhitLineNumbers = new HBox();
-        textAreaWhitLineNumbers.getChildren().addAll(lineNumbers,textArea)
+        textAreaWhitLineNumbers.getChildren().addAll(lineNumbers,textArea);
         centerPane.getChildren().add(textAreaWhitLineNumbers);
 
         Button getTextButton = new Button("Save");
@@ -93,7 +93,7 @@ public class ProjectMocha extends Application{
         root.setLeft(leftPane);
         root.setCenter(centerPane);
         root.setTop(topPane);
-        root.setButton(buttonPana);
+        root.setBottom(buttonPane);
 
         textArea.textProperty().addListener((obs, oldtext, newText)->updateLineNumbers(textArea));
         textArea.scrollTopProperty().addListener((observable, oldValue, newValue)->updateLineNumbers(textArea));
@@ -108,7 +108,7 @@ public class ProjectMocha extends Application{
     private void updateLineNumbers(TextArea textArea){
         String[] lines = textArea.getText().split("\n");
         StringBuilder lineNumbersText = new StringBuilder();
-        for(int i=1; i <= lines.length; i++;){
+        for(int i=1; i <= lines.length; i++){
             lineNumbersText.append(i).append("\n");
         }
         lineNumbers.getChildren().clear();
