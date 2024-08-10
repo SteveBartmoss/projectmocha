@@ -2,6 +2,8 @@ import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
@@ -77,6 +79,14 @@ public class ProjectMocha extends Application{
         helpMenu.getItems().addAll(about);
 
         menuBar.getMenus().addAll(fileMenu, editMenu, helpMenu);
+
+        about.setOnAction(event->{
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("About MochaEditor");
+            alert.setHeaderText("Informacion sobre MochaEditor");
+            alert.setContentText("MochaEditor es un editor de texto desarrollado en JavaFX.");
+            alert.showAndWait();
+        });
 
         HBox topPane = new HBox();
         topPane.getChildren().add(menuBar);
