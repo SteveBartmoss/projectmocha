@@ -41,15 +41,7 @@ public class ProjectMocha extends Application{
         textArea.setPromptText("Escribe aqui...");
         VBox.setVgrow(textArea, Priority.ALWAYS);
         VBox centerPane = new VBox();
-        
-        lineNumbers = new TextFlow();
-        VBox.setVgrow(lineNumbers, Priority.ALWAYS);
-
-        HBox textAreaWhitLineNumbers = new HBox();
-        textAreaWhitLineNumbers.getChildren().addAll(lineNumbers,textArea);
-        centerPane.getChildren().add(textAreaWhitLineNumbers);
-
-        HBox.setHgrow(textArea, Priority.ALWAYS);
+        centerPane.getChildren().add(textArea);
 
         Button getTextButton = new Button("Save");
         getTextButton.setOnAction(e -> {
@@ -66,8 +58,6 @@ public class ProjectMocha extends Application{
             String contenido = textArea.getText();
             System.out.println(contenido);
         });
-
-        //centerPane.getChildren().add(getTextButton);
 
         MenuBar menuBar = new MenuBar();
 
@@ -97,25 +87,12 @@ public class ProjectMocha extends Application{
         root.setCenter(centerPane);
         root.setTop(topPane);
         root.setBottom(buttonPane);
-
-        textArea.textProperty().addListener((obs, oldtext, newText)->updateLineNumbers(textArea));
-        textArea.scrollTopProperty().addListener((observable, oldValue, newValue)->updateLineNumbers(textArea));
         
         Scene scene = new Scene(root, 800, 600);
 
         scene.getStylesheets().add(getClass().getResource("themes/darkTheme.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
-    }
-
-    private void updateLineNumbers(TextArea textArea){
-        String[] lines = textArea.getText().split("\n");
-        StringBuilder lineNumbersText = new StringBuilder();
-        for(int i=1; i <= lines.length; i++){
-            lineNumbersText.append(i).append("\n");
-        }
-        lineNumbers.getChildren().clear();
-        lineNumbers.getChildren().add(new Text(lineNumbersText.toString()));
     }
 
     private void guardarArchivo(File file, String content){
