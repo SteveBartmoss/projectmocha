@@ -35,3 +35,16 @@
 .menu-item {
     -fx-text-fill: #ffffff;
 }
+
+.context-menu{
+    -fx-background-color: #3c3f41;
+}
+
+.context-menu .menu-item{
+    -fx-background-color: #3c3f41;
+    -fx-text-fill: #ffffff;
+}
+
+.context-menu .menu-item:hover{
+    -fx-background-color: #555555;  /* Color de fondo al pasar el cursor */
+}
