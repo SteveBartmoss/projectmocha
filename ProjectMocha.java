@@ -28,13 +28,14 @@ public class ProjectMocha extends Application{
     private TextFlow lineNumbers;
 
     public void start(Stage primaryStage){
+
         primaryStage.setTitle("mochaEditor");
 
         BorderPane root = new BorderPane();
 
-        VBox leftPane = new VBox();
+        /*VBox leftPane = new VBox();
         Label explorerLabel = new Label("Explorador");
-        leftPane.getChildren().add(explorerLabel);
+        leftPane.getChildren().add(explorerLabel);*/
 
         TextArea textArea = new TextArea();
         textArea.setPromptText("Escribe aqui...");
@@ -47,6 +48,8 @@ public class ProjectMocha extends Application{
         HBox textAreaWhitLineNumbers = new HBox();
         textAreaWhitLineNumbers.getChildren().addAll(lineNumbers,textArea);
         centerPane.getChildren().add(textAreaWhitLineNumbers);
+
+        HBox.setHgrow(textArea, Priority.ALWAYS);
 
         Button getTextButton = new Button("Save");
         getTextButton.setOnAction(e -> {
@@ -90,7 +93,7 @@ public class ProjectMocha extends Application{
         Label buttonLabel = new Label("Barra inferrior");
         buttonPane.getChildren().add(buttonLabel);
 
-        root.setLeft(leftPane);
+        //root.setLeft(leftPane);
         root.setCenter(centerPane);
         root.setTop(topPane);
         root.setBottom(buttonPane);
@@ -100,7 +103,7 @@ public class ProjectMocha extends Application{
         
         Scene scene = new Scene(root, 800, 600);
 
-        scene.getStylesheets().add(getClass().getResource("darkTheme.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("themes/darkTheme.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
     }
