@@ -25,6 +25,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import filemanager.FileManager;
+
 public class ProjectMocha extends Application{
 
     private TextFlow lineNumbers;
@@ -53,9 +55,12 @@ public class ProjectMocha extends Application{
 
             fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files","*.txt"));
 
+            FileManager fileManager = new FileManager();
+
             File file = fileChooser.showSaveDialog(primaryStage);
             if(file != null){
-                guardarArchivo(file, textArea.getText());
+                //guardarArchivo(file, textArea.getText());
+                fileManager.guardarArchivo(file, textArea.getText());
             }
             String contenido = textArea.getText();
             System.out.println(contenido);
