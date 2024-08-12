@@ -83,6 +83,31 @@ public class ProjectMocha extends Application{
 
         menuBar.getMenus().addAll(fileMenu, editMenu, helpMenu);
 
+        openFile.setOnAction(e ->{
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Abrir Archivo");
+
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
+
+            File file = fileChooser.showOpenDialog(primaryStage);
+
+            try(BufferedReader br = new BufferedReader(new FileReader(file))){
+                StringBuilder sb = new StringBuilder();
+                String line;
+                while(line = br.readLine()) != null){
+                    sb.append(line).append("\n");
+                }
+
+                textArea.setText(sb.toString());
+            }catch(IOException ex){
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("No se pudo leer el archivo");
+                alert.setContentText("Ocurrio un error al leer archivo: " + ex.getMessage());
+                alert.showAndWait();
+            }        
+        });
+
         about.setOnAction(event->{
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("About MochaEditor");
