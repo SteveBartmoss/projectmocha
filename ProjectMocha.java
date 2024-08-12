@@ -108,6 +108,24 @@ public class ProjectMocha extends Application{
             }        
         });
 
+        saveFile.setOnAction(e->{
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Guardar Archivo");
+
+            //fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files","*.txt"));
+
+            FileManager fileManager = new FileManager();
+
+            File file = fileChooser.showSaveDialog(primaryStage);
+            if(file != null){
+                //guardarArchivo(file, textArea.getText());
+                fileManager.guardarArchivo(file, textArea.getText());
+            }
+            String contenido = textArea.getText();
+            System.out.println(contenido);
+            
+        });
+
         about.setOnAction(event->{
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("About MochaEditor");
