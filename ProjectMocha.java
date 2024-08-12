@@ -113,14 +113,6 @@ public class ProjectMocha extends Application{
         primaryStage.show();
     }
 
-    private void guardarArchivo(File file, String content){
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter(file))){
-            writer.write(content);
-        } catch(IOException ex){
-            System.out.println("Error al guardar el archivo: " + ex.getMessage());
-        }
-    }
-
     public static void main(String[] args){
         launch(args);
     }
