@@ -29,8 +29,6 @@ import filemanager.FileManager;
 
 public class ProjectMocha extends Application{
 
-    private TextFlow lineNumbers;
-
     public void start(Stage primaryStage){
 
         primaryStage.setTitle("mochaEditor");
