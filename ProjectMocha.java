@@ -51,7 +51,7 @@ public class ProjectMocha extends Application{
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Guardar Archivo");
 
-            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files","*.txt"));
+            //fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files","*.txt"));
 
             FileManager fileManager = new FileManager();
 
@@ -87,7 +87,7 @@ public class ProjectMocha extends Application{
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Abrir Archivo");
 
-            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
+            //fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
 
             File file = fileChooser.showOpenDialog(primaryStage);
 
