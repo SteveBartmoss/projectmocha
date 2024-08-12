@@ -45,25 +45,6 @@ public class ProjectMocha extends Application{
         VBox centerPane = new VBox();
         centerPane.getChildren().add(textArea);
 
-        Button getTextButton = new Button("Save");
-        getTextButton.setOnAction(e -> {
-
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Guardar Archivo");
-
-            //fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files","*.txt"));
-
-            FileManager fileManager = new FileManager();
-
-            File file = fileChooser.showSaveDialog(primaryStage);
-            if(file != null){
-                //guardarArchivo(file, textArea.getText());
-                fileManager.guardarArchivo(file, textArea.getText());
-            }
-            String contenido = textArea.getText();
-            System.out.println(contenido);
-        });
-
         MenuBar menuBar = new MenuBar();
 
         Menu fileMenu = new Menu("Archivo");
@@ -136,7 +117,6 @@ public class ProjectMocha extends Application{
 
         HBox topPane = new HBox();
         topPane.getChildren().add(menuBar);
-        topPane.getChildren().add(getTextButton);
 
         VBox buttonPane = new VBox();
         Label buttonLabel = new Label("Barra inferrior");
