@@ -31,6 +31,8 @@ import filemanager.FileManager;
 
 public class ProjectMocha extends Application{
 
+    File archivo = null;
+
     public void start(Stage primaryStage){
 
         primaryStage.setTitle("mochaEditor");
@@ -72,7 +74,9 @@ public class ProjectMocha extends Application{
 
             //fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
 
-            File file = fileChooser.showOpenDialog(primaryStage);
+            //File file = fileChooser.showOpenDialog(primaryStage);
+
+            archivo = fileChooser.showOpenDialog(primaryStage);
 
             FileManager fileManager = new FileManager();
 
@@ -97,21 +101,27 @@ public class ProjectMocha extends Application{
         });
 
         saveFile.setOnAction(e->{
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Guardar Archivo");
-
-            //fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files","*.txt"));
 
             FileManager fileManager = new FileManager();
 
-            File file = fileChooser.showSaveDialog(primaryStage);
-            if(file != null){
-                //guardarArchivo(file, textArea.getText());
-                fileManager.guardarArchivo(file, textArea.getText());
+            if(archivo != null){
+                FileChooser fileChooser = new FileChooser();
+                fileChooser.setTitle("Guardar Archivo");
+
+                
+                File file = fileChooser.showSaveDialog(primaryStage);
+                if(file != null){
+                    //guardarArchivo(file, textArea.getText());
+                    fileManager.guardarArchivo(file, textArea.getText());
+                }
+                String contenido = textArea.getText();
+                System.out.println(contenido);
+            }else{
+                fileManager.guardarArchivo(archivo, textArea.getText());
             }
-            String contenido = textArea.getText();
-            System.out.println(contenido);
             
+            //fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files","*.txt"));
+
         });
 
         about.setOnAction(event->{
