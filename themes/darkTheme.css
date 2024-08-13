@@ -23,6 +23,10 @@
     -fx-highlight-text-fill: #ffffff;
 }
 
+.text-area:focused {
+    -fx-border-color: transparent; /* Quita el contorno */
+}
+
 /* Estilo para la barra de menú */
 .menu-bar {
     -fx-background-color: #3c3f41;
