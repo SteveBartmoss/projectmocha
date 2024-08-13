@@ -105,19 +105,17 @@ public class ProjectMocha extends Application{
             FileManager fileManager = new FileManager();
 
             if(archivo != null){
+                fileManager.guardarArchivo(archivo, textArea.getText());
+            }else{
                 FileChooser fileChooser = new FileChooser();
                 fileChooser.setTitle("Guardar Archivo");
-
-                
-                File file = fileChooser.showSaveDialog(primaryStage);
-                if(file != null){
+                archivo = fileChooser.showSaveDialog(primaryStage);
+                 if(file != null){
                     //guardarArchivo(file, textArea.getText());
                     fileManager.guardarArchivo(file, textArea.getText());
                 }
                 String contenido = textArea.getText();
                 System.out.println(contenido);
-            }else{
-                fileManager.guardarArchivo(archivo, textArea.getText());
             }
             
             //fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files","*.txt"));
