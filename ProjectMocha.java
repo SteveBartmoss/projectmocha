@@ -20,8 +20,10 @@ import javafx.stage.FileChooser;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -75,7 +77,7 @@ public class ProjectMocha extends Application{
             try(BufferedReader br = new BufferedReader(new FileReader(file))){
                 StringBuilder sb = new StringBuilder();
                 String line;
-                while(line = br.readLine()) != null){
+                while((line = br.readLine()) != null){
                     sb.append(line).append("\n");
                 }
 
