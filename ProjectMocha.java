@@ -74,7 +74,11 @@ public class ProjectMocha extends Application{
 
             File file = fileChooser.showOpenDialog(primaryStage);
 
-            try(BufferedReader br = new BufferedReader(new FileReader(file))){
+            FileManager fileManager = new FileManager();
+
+            textArea.setText(fileManager.abrirArchivo(file));
+
+            /*try(BufferedReader br = new BufferedReader(new FileReader(file))){
                 StringBuilder sb = new StringBuilder();
                 String line;
                 while((line = br.readLine()) != null){
@@ -88,7 +92,8 @@ public class ProjectMocha extends Application{
                 alert.setHeaderText("No se pudo leer el archivo");
                 alert.setContentText("Ocurrio un error al leer archivo: " + ex.getMessage());
                 alert.showAndWait();
-            }        
+            }*/ 
+            
         });
 
         saveFile.setOnAction(e->{
