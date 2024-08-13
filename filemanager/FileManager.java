@@ -17,8 +17,8 @@ public class FileManager {
     }
   }
 
-  public string abrirArchivo(File archivo){
-    try(BufferedReader br = mew BufferedReader(new FileReader(archivo))){
+  public String abrirArchivo(File archivo){
+    try(BufferedReader br = new BufferedReader(new FileReader(archivo))){
       StringBuilder sb = new StringBuilder();
       String line;
       while((line = br.readLine())!=null){
@@ -27,6 +27,7 @@ public class FileManager {
       return sb.toString();
     }catch(IOException ex){
       System.out.println("Error al leer archivo: " + ex.getMessage();
+      return '';
     }
   }
 }
