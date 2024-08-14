@@ -145,6 +145,7 @@ public class ProjectMocha extends Application{
             aboutContent.getChildren().addAll(header, info, closeButton);
 
             Scene aboutScene = new Scene(aboutContent, 300,150);
+            aboutScene.getStylesheets().add(getClass().getResource("themes/darkTheme.css").toExternalForm());
             aboutStage.setScene(aboutScene);
             aboutStage.showAndWait();
             
