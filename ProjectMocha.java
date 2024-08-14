@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
@@ -17,6 +18,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -80,7 +82,7 @@ public class ProjectMocha extends Application{
 
             FileManager fileManager = new FileManager();
 
-            textArea.setText(fileManager.abrirArchivo(file));
+            textArea.setText(fileManager.abrirArchivo(archivo));
 
             /*try(BufferedReader br = new BufferedReader(new FileReader(file))){
                 StringBuilder sb = new StringBuilder();
@@ -110,9 +112,9 @@ public class ProjectMocha extends Application{
                 FileChooser fileChooser = new FileChooser();
                 fileChooser.setTitle("Guardar Archivo");
                 archivo = fileChooser.showSaveDialog(primaryStage);
-                 if(file != null){
+                 if(archivo != null){
                     //guardarArchivo(file, textArea.getText());
-                    fileManager.guardarArchivo(file, textArea.getText());
+                    fileManager.guardarArchivo(archivo, textArea.getText());
                 }
                 String contenido = textArea.getText();
                 System.out.println(contenido);
@@ -140,7 +142,7 @@ public class ProjectMocha extends Application{
             Button closeButton = new Button("Cerrar");
             closeButton.setOnAction(e -> aboutStage.close());
 
-            aboutContent.getChildren().addAll(header, info, closeButton):
+            aboutContent.getChildren().addAll(header, info, closeButton);
 
             Scene aboutScene = new Scene(aboutContent, 300,150);
             aboutStage.setScene(aboutScene);
