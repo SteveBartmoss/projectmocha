@@ -26,8 +26,8 @@ public class FileManager {
       }
       return sb.toString();
     }catch(IOException ex){
-      System.out.println("Error al leer archivo: " + ex.getMessage();
-      return '';
+      System.out.println("Error al leer archivo: " + ex.getMessage());
+      return null;
     }
   }
 }
