@@ -24,6 +24,7 @@
 }
 
 .text-area:focused {
+    -fx-background-color: white;
     -fx-border-color: transparent; /* Quita el contorno */
 }
 
