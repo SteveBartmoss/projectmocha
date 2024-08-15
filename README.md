@@ -3,7 +3,7 @@
 Proyecto de un editor de codigo hecho en javaFX, para que se tenga una 
 opcion nativa y de codigo abierto para la comunidad
 
-##Mocha Editor 1.0.0
+## Mocha Editor 1.0.0
 
 El editor cuenta con la funcionalidad senciolla de un block de notas (incluso mas reducido) 
 pero se espera que continue evolucionando para volverse un editor mas completo, esta version cuenta 
@@ -21,7 +21,17 @@ javac --module-path /usr/share/openjfx/lib --add-modules javafx.controls Project
 ### ejecutar
 java --module-path /usr/share/openjfx/lib --add-modules javafx.controls ProjectMocha
 
-requerimientos en el sistema:
+### Requerimientos en el sistema:
 
 tener instalado el jdk de java
 tener instalado fx
+
+## Proximas actualizaciones 
+
+El proyecto tiene como objetivo volverse un editor mas funcional como lo es notePad++ o 
+mas parecido a vs code, por lo que se espera que poco a tome la forma de estos editores 
+por el momento estas son algunas de las actualizaciones que se piensan agregar.
+
+Poder abrir carpetas/proyectos y ver los archivos disponibles
+Tener multiples archivos abiertos en el editor
+Inclusion de comandos
