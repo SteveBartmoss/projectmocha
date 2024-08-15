@@ -45,6 +45,10 @@ public class ProjectMocha extends Application{
         Label explorerLabel = new Label("Explorador");
         leftPane.getChildren().add(explorerLabel);*/
 
+        VBox buttonPane = new VBox();
+        Label buttonLabel = new Label("");
+        buttonPane.getChildren().add(buttonLabel);
+
         TextArea textArea = new TextArea();
         textArea.setPromptText("Escribe aqui...");
         VBox.setVgrow(textArea, Priority.ALWAYS);
@@ -83,6 +87,8 @@ public class ProjectMocha extends Application{
             FileManager fileManager = new FileManager();
 
             textArea.setText(fileManager.abrirArchivo(archivo));
+
+            buttonLabel.setText(archivo.getName());
 
             /*try(BufferedReader br = new BufferedReader(new FileReader(file))){
                 StringBuilder sb = new StringBuilder();
@@ -158,10 +164,6 @@ public class ProjectMocha extends Application{
 
         HBox topPane = new HBox();
         topPane.getChildren().add(menuBar);
-
-        VBox buttonPane = new VBox();
-        Label buttonLabel = new Label("Barra inferrior");
-        buttonPane.getChildren().add(buttonLabel);
 
         //root.setLeft(leftPane);
         root.setCenter(centerPane);
