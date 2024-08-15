@@ -51,7 +51,7 @@ public class ProjectMocha extends Application{
         buttonPane.getChildren().add(buttonLabel);
 
         TextArea textArea = new TextArea();
-        textArea.setPromptText("Escribe aqui...");
+        //textArea.setPromptText("Escribe aqui...");
         VBox.setVgrow(textArea, Priority.ALWAYS);
         VBox centerPane = new VBox();
         centerPane.getChildren().add(textArea);
