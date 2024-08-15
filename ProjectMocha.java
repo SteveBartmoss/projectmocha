@@ -34,6 +34,7 @@ import filemanager.FileManager;
 public class ProjectMocha extends Application{
 
     File archivo = null;
+    int initialContentLength = 0;
 
     public void start(Stage primaryStage){
 
@@ -88,6 +89,8 @@ public class ProjectMocha extends Application{
 
             textArea.setText(fileManager.abrirArchivo(archivo));
 
+            initialContentLength = fileManager.abrirArchivo(archivo).length();
+            
             buttonLabel.setText(archivo.getName());
 
             /*try(BufferedReader br = new BufferedReader(new FileReader(file))){
@@ -108,12 +111,26 @@ public class ProjectMocha extends Application{
             
         });
 
+        textArea.textProperty().addListener(new ChangeListener<String>(){
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue){
+                if (archivo != null){
+                    if(newValue.length() != initialContentLength){
+                        buttonLabel.setText(archivo.getName() + " (Modificado)");
+                    } else {
+                        buttonLabel.setText(archivo.getName());
+                    }
+                }
+            }
+        });
+
         saveFile.setOnAction(e->{
 
             FileManager fileManager = new FileManager();
 
             if(archivo != null){
                 fileManager.guardarArchivo(archivo, textArea.getText());
+                initialContentLength = textArea.getText().length();
+                buttonLabel.setText(archivo.getName());
             }else{
                 FileChooser fileChooser = new FileChooser();
                 fileChooser.setTitle("Guardar Archivo");
@@ -121,6 +138,8 @@ public class ProjectMocha extends Application{
                  if(archivo != null){
                     //guardarArchivo(file, textArea.getText());
                     fileManager.guardarArchivo(archivo, textArea.getText());
+                    initialContentLength = textArea.getText().length();
+                    buttonLabel.setText(archivo.getName());
                 }
                 String contenido = textArea.getText();
                 System.out.println(contenido);
