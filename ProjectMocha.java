@@ -35,6 +35,7 @@ public class ProjectMocha extends Application{
 
     File archivo = null;
     int initialContentLength = 0;
+    bool haveChanges = false;
 
     public void start(Stage primaryStage){
 
@@ -116,8 +117,10 @@ public class ProjectMocha extends Application{
                 if (archivo != null){
                     if(newValue.length() != initialContentLength){
                         buttonLabel.setText(archivo.getName() + " (Modificado)");
+                        haveChanges = true;
                     } else {
                         buttonLabel.setText(archivo.getName());
+                        haveChanges = false;
                     }
                 }
             }
@@ -131,6 +134,7 @@ public class ProjectMocha extends Application{
                 fileManager.guardarArchivo(archivo, textArea.getText());
                 initialContentLength = textArea.getText().length();
                 buttonLabel.setText(archivo.getName());
+                haveChanges = false;
             }else{
                 FileChooser fileChooser = new FileChooser();
                 fileChooser.setTitle("Guardar Archivo");
@@ -140,6 +144,7 @@ public class ProjectMocha extends Application{
                     fileManager.guardarArchivo(archivo, textArea.getText());
                     initialContentLength = textArea.getText().length();
                     buttonLabel.setText(archivo.getName());
+                     haveChanges = false;
                 }
                 String contenido = textArea.getText();
                 System.out.println(contenido);
