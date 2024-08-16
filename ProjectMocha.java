@@ -35,7 +35,7 @@ public class ProjectMocha extends Application{
 
     File archivo = null;
     int initialContentLength = 0;
-    bool haveChanges = false;
+    boolean haveChanges = false;
 
     public void start(Stage primaryStage){
 
