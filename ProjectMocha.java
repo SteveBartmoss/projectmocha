@@ -49,6 +49,7 @@ public class ProjectMocha extends Application{
 
         VBox buttonPane = new VBox();
         Label buttonLabel = new Label("");
+        buttonLabel.setPadding(new Insets(5, 0, 5, 5 )); // top, right, bottom, left
         buttonPane.getChildren().add(buttonLabel);
 
         TextArea textArea = new TextArea();
