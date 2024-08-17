@@ -94,7 +94,7 @@ public class ProjectMocha extends Application{
             tabPane.getTabs().add(fileWindowManager.setNewFileWindo(archivo));
             //textArea.setText(fileManager.abrirArchivo(archivo));
 
-            initialContentLength = fileManager.abrirArchivo(archivo).length();
+            //initialContentLength = fileManager.abrirArchivo(archivo).length();
             
             //buttonLabel.setText(archivo.getName());
 
@@ -120,7 +120,7 @@ public class ProjectMocha extends Application{
                 //fileManager.guardarArchivo(archivo, textArea.getText());
                 //initialContentLength = textArea.getText().length();
                 buttonLabel.setText(archivo.getName());
-                haveChanges = false;
+                //haveChanges = false;
             }else{
                 FileChooser fileChooser = new FileChooser();
                 fileChooser.setTitle("Guardar Archivo");
@@ -129,7 +129,7 @@ public class ProjectMocha extends Application{
                     //fileManager.guardarArchivo(archivo, textArea.getText());
                     //initialContentLength = textArea.getText().length();
                     buttonLabel.setText(archivo.getName());
-                     haveChanges = false;
+                    //haveChanges = false;
                 }
                 //String contenido = textArea.getText();
                 //System.out.println(contenido);
