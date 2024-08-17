@@ -53,3 +53,35 @@
 .context-menu .menu-item:hover{
     -fx-background-color: #555555;  /* Color de fondo al pasar el cursor */
 }
+
+/* Estilo para el TabPane */
+.tab-pane {
+    -fx-background-color: #2b2b2b; /* Fondo del TabPane */
+}
+
+/* Estilo para las Tabs */
+.tab {
+    -fx-background-color: #3c3f41; /* Fondo de las pestañas */
+    -fx-text-fill: #ffffff;        /* Color del texto en las pestañas */
+}
+
+/* Estilo para la parte donde están los títulos de las Tabs */
+.tab-header-area {
+    -fx-background-color: #2b2b2b; /* Fondo de la zona de encabezado de las Tabs */
+}
+
+/* Estilo para la pestaña seleccionada */
+.tab:selected {
+    -fx-background-color: #555555; /* Fondo de la pestaña seleccionada */
+    -fx-text-fill: #ffffff;        /* Color del texto en la pestaña seleccionada */
+}
+
+/* Estilo para el contenido dentro de las Tabs */
+.tab-content-area {
+    -fx-background-color: #2b2b2b; /* Fondo del área de contenido de las pestañas */
+}
+
+/* Estilo para la barra de las Tabs */
+.tab-header-background {
+    -fx-background-color: #2b2b2b; /* Fondo detrás de los títulos de las pestañas */
+}
