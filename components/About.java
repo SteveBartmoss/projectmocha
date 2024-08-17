@@ -30,7 +30,8 @@ public class About {
 
     aboutContent.getChildren().addAll(header, info, closeButton);
 
-    Scene aboutScene = new Scene(aboutContent, 300, 150);
+    Scene aboutScene = new Scene(aboutContent, 500, 150);
+    aboutScene.getStylesheets().add(getClass().getResource("../themes/darkTheme.css").toExternalForm());
     aboutStage.setScene(aboutScene);
     aboutStage.showAndWait();
   }
