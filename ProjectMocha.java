@@ -34,6 +34,7 @@ import java.io.IOException;
 
 import filemanager.FileManager;
 import components.About;
+import components.FileWindow;
 
 public class ProjectMocha extends Application{
 
@@ -41,6 +42,7 @@ public class ProjectMocha extends Application{
     int initialContentLength = 0;
     boolean haveChanges = false;
     FileManager fileManager = new FileManager();
+    FileWindow fileWindowManager = new FileWindow();
 
     public void start(Stage primaryStage){
 
@@ -54,10 +56,12 @@ public class ProjectMocha extends Application{
         buttonPane.getChildren().add(buttonLabel);
 
         TabPane tabPane = new TabPane();
-        Tab tab1 = new Tab("Tab1");
+
+        /*Tab tab1 = new Tab("Tab1");
         TextArea textArea = new TextArea();
         tab1.setContent(textArea);
-        tabPane.getTabs().add(tab1);
+        tabPane.getTabs().add(tab1);*/
+
         VBox.setVgrow(tabPane, Priority.ALWAYS);
         VBox centerPane = new VBox();
         centerPane.getChildren().add(tabPane);
@@ -87,15 +91,16 @@ public class ProjectMocha extends Application{
 
             archivo = fileChooser.showOpenDialog(primaryStage);
 
-            textArea.setText(fileManager.abrirArchivo(archivo));
+            tabPane.getTabs().add(fileWindowManager.setNewFileWindo(archivo));
+            //textArea.setText(fileManager.abrirArchivo(archivo));
 
             initialContentLength = fileManager.abrirArchivo(archivo).length();
             
-            buttonLabel.setText(archivo.getName());
+            //buttonLabel.setText(archivo.getName());
 
         });
 
-        textArea.textProperty().addListener(new ChangeListener<String>(){
+        /*textArea.textProperty().addListener(new ChangeListener<String>(){
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue){
                 if (archivo != null){
                     if(newValue.length() != initialContentLength){
@@ -107,13 +112,13 @@ public class ProjectMocha extends Application{
                     }
                 }
             }
-        });
+        });*/
 
         saveFile.setOnAction(e->{
 
             if(archivo != null){
-                fileManager.guardarArchivo(archivo, textArea.getText());
-                initialContentLength = textArea.getText().length();
+                //fileManager.guardarArchivo(archivo, textArea.getText());
+                //initialContentLength = textArea.getText().length();
                 buttonLabel.setText(archivo.getName());
                 haveChanges = false;
             }else{
@@ -121,13 +126,13 @@ public class ProjectMocha extends Application{
                 fileChooser.setTitle("Guardar Archivo");
                 archivo = fileChooser.showSaveDialog(primaryStage);
                  if(archivo != null){
-                    fileManager.guardarArchivo(archivo, textArea.getText());
-                    initialContentLength = textArea.getText().length();
+                    //fileManager.guardarArchivo(archivo, textArea.getText());
+                    //initialContentLength = textArea.getText().length();
                     buttonLabel.setText(archivo.getName());
                      haveChanges = false;
                 }
-                String contenido = textArea.getText();
-                System.out.println(contenido);
+                //String contenido = textArea.getText();
+                //System.out.println(contenido);
             }
             
 
