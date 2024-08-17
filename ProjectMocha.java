@@ -115,7 +115,16 @@ public class ProjectMocha extends Application{
         });*/
 
         saveFile.setOnAction(e->{
-            fileWindowManager.saveWindowChanges();
+            Tab selectedTab = tabPane.getSelectionModel().getSelectedItem();
+
+            if(selectedTab != null){
+                FileWindow fileWindow = (FileWindow) selectedTab.getUserData();
+                if (fileWindow != null) {
+                    // Llama al método para guardar cambios en el archivo asociado
+                    fileWindow.saveWindowChanges();
+                }
+            }
+            
             /*if(archivo != null){
                 //fileManager.guardarArchivo(archivo, textArea.getText());
                 //initialContentLength = textArea.getText().length();
