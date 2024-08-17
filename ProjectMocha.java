@@ -42,7 +42,7 @@ public class ProjectMocha extends Application{
     int initialContentLength = 0;
     boolean haveChanges = false;
     FileManager fileManager = new FileManager();
-    FileWindow fileWindowManager = new FileWindow();
+    //FileWindow fileWindowManager = new FileWindow();
 
     public void start(Stage primaryStage){
 
@@ -86,12 +86,17 @@ public class ProjectMocha extends Application{
         menuBar.getMenus().addAll(fileMenu, editMenu, helpMenu);
 
         openFile.setOnAction(e ->{
+
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Abrir Archivo");
 
             archivo = fileChooser.showOpenDialog(primaryStage);
+            if (archivo != null) {
+                Tab newTab = FileWindow.createTab(archivo, fileManager);
+                tabPane.getTabs().add(newTab);
+            }
 
-            tabPane.getTabs().add(fileWindowManager.setNewFileWindo(archivo));
+            //tabPane.getTabs().add(fileWindowManager.setNewFileWindo(archivo));
             //textArea.setText(fileManager.abrirArchivo(archivo));
 
             //initialContentLength = fileManager.abrirArchivo(archivo).length();
