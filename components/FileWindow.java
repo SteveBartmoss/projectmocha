@@ -13,52 +13,47 @@ import filemanager.FileManager;
 
 public class FileWindow{
 
-    int initialContentLength = 0;
-    
-    FileManager fileManager = new FileManager();
+    private File archivo;
+    private TextArea textArea;
+    private Tab tabFile;
+    private int initialContentLength = 0;
+    private FileManager fileManager = new FileManager();
 
-    public Tab setNewFileWindo(File archivo){
+    public FileWindow(File archivo, TextArea textArea, Tab tabFile) {
+        this.archivo = archivo;
+        this.textArea = textArea;
+        this.tabFile = tabFile;
+        this.initialContentLength = textArea.getText().length();
 
-        
-        Tab tabFile = new Tab("");
-        TextArea textArea = new TextArea();
-
-        tabFile.setText(archivo.getName());
-        tabFile.setContent(textArea);
-
-        textArea.setText(fileManager.abrirArchivo(archivo));
-        initialContentLength = fileManager.abrirArchivo(archivo).length();
-
-        textArea.textProperty().addListener(new ChangeListener<String>(){
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue){
-                if(archivo != null){
-                    if(newValue.length() != initialContentLength){
+        textArea.textProperty().addListener(new ChangeListener<String>() {
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (archivo != null) {
+                    if (newValue.length() != initialContentLength) {
                         tabFile.setText(archivo.getName() + " (Modificado)");
-                    }
-                    else{
+                    } else {
                         tabFile.setText(archivo.getName());
                     }
                 }
             }
         });
+    }
 
+    public void saveWindowChanges() {
+        if (archivo != null) {
+            fileManager.guardarArchivo(archivo, textArea.getText());
+            initialContentLength = textArea.getText().length();
+            tabFile.setText(archivo.getName());
+        }
+    }
+
+    public static Tab createTab(File archivo, FileManager fileManager) {
+        Tab tabFile = new Tab(archivo.getName());
+        TextArea textArea = new TextArea();
+        textArea.setText(fileManager.abrirArchivo(archivo));
+        FileWindow fileWindow = new FileWindow(archivo, textArea, tabFile);
+        tabFile.setContent(textArea);
+        tabFile.setUserData(fileWindow);
         return tabFile;
     }
 
-    public void saveWindowChanges(){
-        
-        /*if(archivo != null){
-            fileManager.guardarArchivo(archivo, textArea.getText());
-            initialContentLength = textArea.getText().length();
-        }
-        else{
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Guardar Archivo");
-            Stage tabStage = (Stage) tabFile.getTabPane().getScene().getWindow();
-            archivo = fileChooser.showSaveDialog(tabStage);
-            fileManager.guardarArchivo(localFile, textArea.getText());
-            initialContentLength = textArea.getText().length();
-        }*/
-        
-    }
 }
