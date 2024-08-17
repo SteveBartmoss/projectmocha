@@ -85,3 +85,8 @@
 .tab-header-background {
     -fx-background-color: #2b2b2b; /* Fondo detrás de los títulos de las pestañas */
 }
+
+/* Asegurar que el texto en las tabs sea de color claro */
+.tab-label {
+    -fx-text-fill: #ffffff; /* Color blanco para el texto en las pestañas */
+}
