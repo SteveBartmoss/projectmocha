@@ -40,6 +40,7 @@ public class ProjectMocha extends Application{
     File archivo = null;
     int initialContentLength = 0;
     boolean haveChanges = false;
+    FileManager fileManager = new FileManager();
 
     public void start(Stage primaryStage){
 
@@ -86,8 +87,6 @@ public class ProjectMocha extends Application{
 
             archivo = fileChooser.showOpenDialog(primaryStage);
 
-            FileManager fileManager = new FileManager();
-
             textArea.setText(fileManager.abrirArchivo(archivo));
 
             initialContentLength = fileManager.abrirArchivo(archivo).length();
@@ -111,8 +110,6 @@ public class ProjectMocha extends Application{
         });
 
         saveFile.setOnAction(e->{
-
-            FileManager fileManager = new FileManager();
 
             if(archivo != null){
                 fileManager.guardarArchivo(archivo, textArea.getText());
