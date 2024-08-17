@@ -115,8 +115,8 @@ public class ProjectMocha extends Application{
         });*/
 
         saveFile.setOnAction(e->{
-
-            if(archivo != null){
+            fileWindowManager.saveWindowChanges();
+            /*if(archivo != null){
                 //fileManager.guardarArchivo(archivo, textArea.getText());
                 //initialContentLength = textArea.getText().length();
                 buttonLabel.setText(archivo.getName());
@@ -133,9 +133,8 @@ public class ProjectMocha extends Application{
                 }
                 //String contenido = textArea.getText();
                 //System.out.println(contenido);
-            }
+            }*/
             
-
         });
 
         about.setOnAction(event->{
