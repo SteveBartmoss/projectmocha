@@ -1,5 +1,12 @@
 package components;
 
+import java.io.File;
+
+import javafx.scene.control.TextArea;
+import javafx.scene.control.Tab;
+
+import filemanager.FileManager;
+
 public class FileWindow{
 
     int initialContentLength = 0;
