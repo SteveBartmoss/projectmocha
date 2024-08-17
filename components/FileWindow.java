@@ -13,25 +13,25 @@ import filemanager.FileManager;
 
 public class FileWindow{
 
-    File localFile = null;
     int initialContentLength = 0;
+    
     FileManager fileManager = new FileManager();
-    Tab tabFile = new Tab("");
-    TextArea textArea = new TextArea();
 
     public Tab setNewFileWindo(File archivo){
 
-        localFile = archivo;
+        
+        Tab tabFile = new Tab("");
+        TextArea textArea = new TextArea();
 
         tabFile.setText(archivo.getName());
         tabFile.setContent(textArea);
 
-        textArea.setText(fileManager.abrirArchivo(localFile));
-        initialContentLength = fileManager.abrirArchivo(localFile).length();
+        textArea.setText(fileManager.abrirArchivo(archivo));
+        initialContentLength = fileManager.abrirArchivo(archivo).length();
 
         textArea.textProperty().addListener(new ChangeListener<String>(){
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue){
-                if(localFile != null){
+                if(archivo != null){
                     if(newValue.length() != initialContentLength){
                         tabFile.setText(archivo.getName() + " (Modificado)");
                     }
@@ -47,18 +47,18 @@ public class FileWindow{
 
     public void saveWindowChanges(){
         
-        if(localFile != null){
-            fileManager.guardarArchivo(localFile, textArea.getText());
+        /*if(archivo != null){
+            fileManager.guardarArchivo(archivo, textArea.getText());
             initialContentLength = textArea.getText().length();
         }
         else{
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Guardar Archivo");
             Stage tabStage = (Stage) tabFile.getTabPane().getScene().getWindow();
-            localFile = fileChooser.showSaveDialog(tabStage);
+            archivo = fileChooser.showSaveDialog(tabStage);
             fileManager.guardarArchivo(localFile, textArea.getText());
             initialContentLength = textArea.getText().length();
-        }
+        }*/
         
     }
 }
