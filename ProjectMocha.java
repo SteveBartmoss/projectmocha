@@ -22,6 +22,9 @@ import javafx.stage.Modality;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -49,10 +52,14 @@ public class ProjectMocha extends Application{
         buttonLabel.setPadding(new Insets(5, 0, 5, 5 )); // top, right, bottom, left
         buttonPane.getChildren().add(buttonLabel);
 
+        TabPane tabPane = new TabPane();
+        Tab tab1 = new Tab("Tab1");
         TextArea textArea = new TextArea();
-        VBox.setVgrow(textArea, Priority.ALWAYS);
+        tab1.setContent(textArea);
+        tabPane.getTabs().add(tab1);
+        VBox.setVgrow(tabPane, Priority.ALWAYS);
         VBox centerPane = new VBox();
-        centerPane.getChildren().add(textArea);
+        centerPane.getChildren().add(tabPane);
 
         MenuBar menuBar = new MenuBar();
 
