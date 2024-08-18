@@ -3,6 +3,19 @@
 Proyecto de un editor de codigo hecho en javaFX, para que se tenga una 
 opcion nativa y de codigo abierto para la comunidad
 
+### Change Log
+
+# Mocha Editor 1.5.0 (onDevelop) 18/08/2024
+
+Se agrego la posibilidad de abrir diferentes archivos desde el editor, ahora se muestran los archivos 
+en forma de tabs que se aparecen mas a los editores profecionales como vs code o atom, el guardado de archivos se asocia a la tab que esta siendo interactuada o esta seleccionada en ese momento. 
+
+Se cambio la estructura de la representacion del archivo abierto, ahora se tiene un objeto que almacena la informacion del archivo y su estado, se tiene una clase llamada FileWindow que es la encargada de mantener el estado del archivo que se abrio y la realcion de la tab y el archivo que 
+se tiene abierto en ese tab.
+
+Se agrego un manejo de erroes mas robusto y ahora se propaga la exception que ocurre al abrir o cerrar un archivo, esto se implemento en la clase FileManager que es la encargada de manejar la apertura 
+y escritura de archivos y contiene una funcion para mostrar un error al momento de manejar archivos.
+
 ## Mocha Editor 1.0.0
 
 El editor cuenta con la funcionalidad sencilla de un block de notas (incluso mas reducido) 
