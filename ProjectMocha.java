@@ -1,3 +1,4 @@
+import javafx.application.Platform;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.beans.value.ChangeListener;
@@ -69,7 +70,7 @@ public class ProjectMocha extends Application{
         MenuBar menuBar = new MenuBar();
 
         Menu fileMenu = new Menu("Archivo");
-        Menu editMenu = new Menu("Editar");
+        //Menu editMenu = new Menu("Editar");
         Menu helpMenu = new Menu("Ayuda");
 
         MenuItem newFile = new MenuItem("Nuevo");
@@ -83,7 +84,12 @@ public class ProjectMocha extends Application{
         fileMenu.getItems().addAll(newFile, openFile, saveFile, exit);
         helpMenu.getItems().addAll(about);
 
-        menuBar.getMenus().addAll(fileMenu, editMenu, helpMenu);
+        //menuBar.getMenus().addAll(fileMenu, editMenu, helpMenu);
+        menuBar.getMenus().addAll(fileMenu, helpMenu);
+
+        newFile.setOnAction(e ->{
+
+        });
 
         openFile.setOnAction(e ->{
 
@@ -149,6 +155,10 @@ public class ProjectMocha extends Application{
                 //System.out.println(contenido);
             }*/
             
+        });
+
+        exit.setOnAction(e ->{
+            Platform.exit();
         });
 
         about.setOnAction(event->{
