@@ -34,6 +34,13 @@ public class FileWindow{
                         tabFile.setText(archivo.getName());
                     }
                 }
+                else{
+                    if (newValue.length() != initialContentLength) {
+                        tabFile.setText("newFile (Modificado)");
+                    } else {
+                        tabFile.setText("newFile");
+                    }
+                }
             }
         });
     }
@@ -44,12 +51,31 @@ public class FileWindow{
             initialContentLength = textArea.getText().length();
             tabFile.setText(archivo.getName());
         }
+        else{
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Guardar Archivo");
+            Stage tabStage = (Stage) tabFile.getTabPane().getScene().getWindow();
+            archivo = fileChooser.showSaveDialog(tabStage);
+            fileManager.guardarArchivo(archivo, textArea.getText());
+            initialContentLength = textArea.getText().length();
+            tabFile.setText(archivo.getName());
+        }
     }
 
     public static Tab createTab(File archivo, FileManager fileManager) {
-        Tab tabFile = new Tab(archivo.getName());
+
+        Tab tabFile;
+
+        if(archivo != null){
+            tabFile = new Tab(archivo.getName());
+        }
+        else{
+            tabFile = new Tab("newFile");
+        }
         TextArea textArea = new TextArea();
-        textArea.setText(fileManager.abrirArchivo(archivo));
+        if(archivo != null){
+            textArea.setText(fileManager.abrirArchivo(archivo));
+        }
         FileWindow fileWindow = new FileWindow(archivo, textArea, tabFile);
         tabFile.setContent(textArea);
         tabFile.setUserData(fileWindow);
