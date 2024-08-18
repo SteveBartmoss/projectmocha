@@ -17,7 +17,12 @@ public class FileManager {
     }
   }
 
-  public String abrirArchivo(File archivo){
+  public String abrirArchivo(File archivo) throws IOException{
+
+    if(archivo == null || !archivo.exists() || !archivo.canRead()){
+      throw new IOException("El archivo no existe o no se puede leer: "+ archivo.getName());
+    }
+
     try(BufferedReader br = new BufferedReader(new FileReader(archivo))){
       StringBuilder sb = new StringBuilder();
       String line;
@@ -25,9 +30,11 @@ public class FileManager {
         sb.append(line).append("\n");
       }
       return sb.toString();
-    }catch(IOException ex){
+    }
+    catch(IOException ex){
       System.out.println("Error al leer archivo: " + ex.getMessage());
       return null;
     }
+    
   }
 }
