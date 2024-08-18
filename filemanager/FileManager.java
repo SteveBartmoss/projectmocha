@@ -1,5 +1,8 @@
 package filemanager;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -9,12 +12,15 @@ import java.io.IOException;
 
 public class FileManager {
 
-  public void guardarArchivo(File archivo, String contenido){
+  public void guardarArchivo(File archivo, String contenido) throws IOException {
+
     try(BufferedWriter escritor = new BufferedWriter(new FileWriter(archivo))){
       escritor.write(contenido);
     } catch(IOException ex){
-      System.out.println("Error al guardar archivo: " + ex.getMessage());
+      System.out.println("Error al guardar el archivo '" + archivo.getName() + "': " + ex.getMessage());
+      showErrorDialog("No se pudo guardar el archivo","Ocurrió un error al guardar el archivo: " + archivo.getName(), ex.getMessage());
     }
+
   }
 
   public String abrirArchivo(File archivo) throws IOException{
@@ -33,8 +39,18 @@ public class FileManager {
     }
     catch(IOException ex){
       System.out.println("Error al leer archivo: " + ex.getMessage());
+      showErrorDialog("No se pudo abrir el archivo","Ocurrió un error al abrir el archivo: " + archivo.getName(), ex.getMessage());
       return null;
     }
-    
+
   }
+
+  private void showErrorDialog(String title, String name, String message){
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setTitle(title);
+    alert.setHeaderText(name);
+    alert.setContentText(message);
+    alert.showAndWait();
+  }
+
 }
