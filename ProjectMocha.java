@@ -4,6 +4,10 @@ import javafx.geometry.Insets;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -50,6 +54,11 @@ public class ProjectMocha extends Application{
         primaryStage.setTitle("mochaEditor");
 
         BorderPane root = new BorderPane();
+
+        KeyCombination keyCombCtrlS = new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN);
+        KeyCombination keyCombCtrlN = new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN);
+        KeyCombination keyCombCtrlO = new KeyCodeCombination(KeyCode.O, KeyCodeCombination.CONTROL_DOWN);
+        KeyCombination keyCombCtrlQ = new KeyCodeCombination(KeyCode.Q, KeyCodeCombination.CONTROL_DOWN);
 
         VBox buttonPane = new VBox();
         Label buttonLabel = new Label("");
@@ -177,6 +186,39 @@ public class ProjectMocha extends Application{
         root.setBottom(buttonPane);
         
         Scene scene = new Scene(root, 800, 600);
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, event->{
+
+            if(keyCombCtrlN.match(event)){
+                Tab newTab = FileWindow.createTab(archivo, fileManager);
+                tabPane.getTabs().add(newTab);
+            }
+            if(keyCombCtrlO.match(event)){
+                FileChooser fileChooser = new FileChooser();
+                fileChooser.setTitle("Abrir Archivo");
+
+                archivo = fileChooser.showOpenDialog(primaryStage);
+                if (archivo != null) {
+                    Tab newTab = FileWindow.createTab(archivo, fileManager);
+                    tabPane.getTabs().add(newTab);
+                }
+            }
+            if(keyCombCtrlS.match(event)){
+                Tab selectedTab = tabPane.getSelectionModel().getSelectedItem();
+
+                if(selectedTab != null){
+                    FileWindow fileWindow = (FileWindow) selectedTab.getUserData();
+                    if (fileWindow != null) {
+                        // Llama al método para guardar cambios en el archivo asociado
+                        fileWindow.saveWindowChanges();
+                    }
+                }
+            }
+            if(keyCombCtrlQ.match(event)){
+                Platform.exit();
+            }
+            
+        });
 
         scene.getStylesheets().add(getClass().getResource("themes/darkTheme.css").toExternalForm());
         primaryStage.setScene(scene);
