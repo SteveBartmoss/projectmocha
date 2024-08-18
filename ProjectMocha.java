@@ -88,7 +88,8 @@ public class ProjectMocha extends Application{
         menuBar.getMenus().addAll(fileMenu, helpMenu);
 
         newFile.setOnAction(e ->{
-
+            Tab newTab = FileWindow.createTab(archivo, fileManager);
+            tabPane.getTabs().add(newTab);
         });
 
         openFile.setOnAction(e ->{
