@@ -99,17 +99,8 @@ public class ProjectMocha extends Application{
 
             archivo = fileChooser.showOpenDialog(primaryStage);
             if (archivo != null) {
-                try{
-                    Tab newTab = FileWindow.createTab(archivo, fileManager);
-                    tabPane.getTabs().add(newTab);
-                } catch(IOException ex){
-                    Alert alert = new Alert(AlertType.ERROR);
-                    alert.setTitle("Error de Archivo");
-                    alert.setHeaderText("No se pudo abrir el archivo");
-                    alert.setContentText("Ocurrió un error al intentar abrir el archivo: " + ex.getMessage());
-                    alert.showAndWait();
-                }
-                
+                Tab newTab = FileWindow.createTab(archivo, fileManager);
+                tabPane.getTabs().add(newTab);
             }
 
             //tabPane.getTabs().add(fileWindowManager.setNewFileWindo(archivo));
