@@ -1,42 +1,43 @@
+import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
-import java.io.File;
 
 public class CodeArea {
 
     private String codigo;
+    private Text textCode;
     private TextFlow textFlow;
 
-    public CodeArea(String codigo) {
-        this.codigo = codigo;
-        this.textFlow = new TextFlow(new Text(codigo));
+    public CodeArea(String code) {
+        this.codigo = code;
+        this.textCode = new Text(code);
+        this.textFlow = new TextFlow(textCode);
+
+        // Event listener for key presses
+        textFlow.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+            String character = event.getCharacter();
+            // Update the code string
+            codigo += character;
+            // Update the text displayed
+            textCode.setText(codigo);
+        });
     }
 
-    // Método para establecer nuevo código y actualizar la visualización
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-        // Actualizar la visualización
-        this.textFlow.getChildren().clear();
-        this.textFlow.getChildren().add(new Text(codigo));
+    public void setCodigo(String code) {
+        this.codigo = code;
+        this.textCode.setText(code);
     }
 
-    // Método para obtener el código actual
     public String getCodigo() {
         return this.codigo;
     }
 
-    // Método para obtener el TextFlow
     public TextFlow getTextFlow() {
         return this.textFlow;
     }
 
-    // Método estático para crear un CodeArea a partir de un archivo
-    public static CodeArea createFromFile(File archivo, FileManager fileManager) {
-        if (archivo != null) {
-            String codigo = fileManager.abrirArchivo(archivo);
-            return new CodeArea(codigo);
-        } else {
-            return new CodeArea(""); // Manejar caso de archivo nulo
-        }
+    public static CodeArea createCodeArea(File archivo, FileManager fileManager) {
+        String code = fileManager.abrirArchivo(archivo);
+        return new CodeArea(code);
     }
 }
