@@ -9,6 +9,8 @@ public class CodeArea {
     private TextFlow textFlow;
     private int currentLineIndex = 0; // Puntero a la línea actual
     private String currentLineText = ""; // Texto de la línea actual
+    private CodeNode pointerCurrentRow;
+    private int pointerCurrentCol;
 
     public CodeArea(String code) {
         this.textFlow = new TextFlow();
@@ -25,6 +27,11 @@ public class CodeArea {
             String character = event.getCharacter();
             handleKeyPress(character);
         });
+
+        textFlow.addEventFilter(KeyEvent.KEY_PRESSED,event ->{
+            keyCode code = event.getCode();
+            handleMoveCursor(code);
+        })
     }
 
     // Inicializa las líneas de código en la lista y el TextFlow
@@ -51,6 +58,8 @@ public class CodeArea {
         while (current != null) {
             textFlow.getChildren().add(new Text(current.line + "\n"));
             current = current.next;
+            pointerCurrentCol = current;
+            int pointerCurrentCol = current.line.length();
         }
     }
 
@@ -66,6 +75,31 @@ public class CodeArea {
             currentLineIndex++;
         }
     }
+
+    private void handleMoveCursor(KeyCode code) {
+    if (code == KeyCode.UP && pointerCurrentRow.prev != null) {
+        pointerCurrentRow = pointerCurrentRow.prev;
+        pointerCurrentCol = Math.min(pointerCurrentCol, pointerCurrentRow.line.length());
+    } else if (code == KeyCode.DOWN && pointerCurrentRow.next != null) {
+        pointerCurrentRow = pointerCurrentRow.next;
+        pointerCurrentCol = Math.min(pointerCurrentCol, pointerCurrentRow.line.length());
+    } else if (code == KeyCode.LEFT) {
+        if (pointerCurrentCol > 0) {
+            pointerCurrentCol--;
+        } else if (pointerCurrentRow.prev != null) {
+            pointerCurrentRow = pointerCurrentRow.prev;
+            pointerCurrentCol = pointerCurrentRow.line.length();
+        }
+    } else if (code == KeyCode.RIGHT) {
+        if (pointerCurrentCol < pointerCurrentRow.line.length()) {
+            pointerCurrentCol++;
+        } else if (pointerCurrentRow.next != null) {
+            pointerCurrentRow = pointerCurrentRow.next;
+            pointerCurrentCol = 0;
+        }
+    }
+    }
+
 
     // Actualiza la línea actual en el TextFlow
     private void updateCurrentLine() {
