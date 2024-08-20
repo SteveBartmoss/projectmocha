@@ -1,15 +1,13 @@
-
-
-public class CodeNode{
+public class CodeNode {
     String line;
+    int lineNumber; // Número de línea
     CodeNode next;
     CodeNode prev;
 
-    public CodeNode(Strin line){
+    public CodeNode(String line, int lineNumber) {
         this.line = line;
-        this.next null;
+        this.lineNumber = lineNumber;
+        this.next = null;
         this.prev = null;
     }
-
-    
 }
