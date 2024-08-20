@@ -91,6 +91,10 @@ public class CodeArea {
     }
 
     private void updateTextFlowAfterCursorMove(){
+        String currentCode = pointerCurrentRow.line;
+        char letra = currentCode.chartAr(pointerCurrentCol);
+        pointerCurrentRow.line = currentCode + "<";
+        updateCurrentLineInTextFlow();
         // Lógica para reflejar la posición del cursor en la interfaz (p. ej., selección de texto)
         // Aquí podrías agregar algún indicador visual en la posición actual del cursor si fuera necesario
         // Por ejemplo, podrías resaltar la línea actual o mover una barra vertical que represente el cursor
