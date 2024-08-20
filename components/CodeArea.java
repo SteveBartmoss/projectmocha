@@ -12,12 +12,17 @@ public class CodeArea {
     private CodeNode pointerCurrentRow;
     private int pointerCurrentCol;
 
+    private Rectangle cursor;
+
     public CodeArea(String code) {
         this.textFlow = new TextFlow();
         this.codigo = code;
         
         // Inicializar las líneas de código
         initializeCodeLines(code);
+
+        cursor = new Rectangle(1,15, Color.BLACK);
+        textFlow.getChildren().add(cursor);
 
         this.pointerCurrentRow = codeLines.head;
         this.pointerCurrentCol = 0;
@@ -54,6 +59,8 @@ public class CodeArea {
         if (!swap.isEmpty()) {
             codeLines.addLine(swap); // Manejar la última línea si no hay carácter de nueva línea al final
         }
+        
+        pointerCurrentRow = codeLines.head; // Inicializar en la primera línea
     }
 
     // Renderiza el contenido inicial en el TextFlow
@@ -64,6 +71,7 @@ public class CodeArea {
             textFlow.getChildren().add(new Text(current.line + "\n"));
             current = current.next;
         }
+        updateCursorPosition();
     }
 
     private void moveCursor(KeyCode code) {
@@ -88,6 +96,22 @@ public class CodeArea {
                 pointerCurrentCol = 0;
             }
         }
+
+        updateCursorPosition();
+    }
+
+    private void updateCursorPosition() {
+        double x = 0;
+        double y = 0;
+
+        // Obtener la posición X e Y del cursor basado en la línea actual y la columna
+        TextFlow tempFlow = new TextFlow(new Text(pointerCurrentRow.line.substring(0, pointerCurrentCol)));
+        x = tempFlow.getBoundsInLocal().getWidth();
+        y = textFlow.getBoundsInLocal().getHeight() - (pointerCurrentRow.line.length() - pointerCurrentCol) * 15;
+
+        // Actualizar la posición del cursor visual
+        cursor.setTranslateX(x);
+        cursor.setTranslateY(y);
     }
 
     private void updateTextFlowAfterCursorMove(){
