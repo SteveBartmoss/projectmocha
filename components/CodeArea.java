@@ -33,7 +33,8 @@ public class CodeArea {
 
         textFlow.addEventFilter(KeyEvent.KEY_PRESSED,event ->{
             keyCode code = event.getCode();
-            handleMoveCursor(code);
+            moveCursor(code);
+            updateTextFlowAfterCursorMove();
         })
     }
 
@@ -57,61 +58,80 @@ public class CodeArea {
 
     // Renderiza el contenido inicial en el TextFlow
     private void renderTextFlow() {
+        textFlow.getChildren().clear();
         CodeNode current = codeLines.head;
         while (current != null) {
             textFlow.getChildren().add(new Text(current.line + "\n"));
             current = current.next;
-            pointerCurrentCol = current;
-            int pointerCurrentCol = current.line.length();
         }
     }
 
-    // Manejar las teclas presionadas para actualizar el contenido
+    private void moveCursor(KeyCode code) {
+        if (code == KeyCode.UP && pointerCurrentRow.prev != null) {
+            pointerCurrentRow = pointerCurrentRow.prev;
+            pointerCurrentCol = Math.min(pointerCurrentCol, pointerCurrentRow.line.length());
+        } else if (code == KeyCode.DOWN && pointerCurrentRow.next != null) {
+            pointerCurrentRow = pointerCurrentRow.next;
+            pointerCurrentCol = Math.min(pointerCurrentCol, pointerCurrentRow.line.length());
+        } else if (code == KeyCode.LEFT) {
+            if (pointerCurrentCol > 0) {
+                pointerCurrentCol--;
+            } else if (pointerCurrentRow.prev != null) {
+                pointerCurrentRow = pointerCurrentRow.prev;
+                pointerCurrentCol = pointerCurrentRow.line.length();
+            }
+        } else if (code == KeyCode.RIGHT) {
+            if (pointerCurrentCol < pointerCurrentRow.line.length()) {
+                pointerCurrentCol++;
+            } else if (pointerCurrentRow.next != null) {
+                pointerCurrentRow = pointerCurrentRow.next;
+                pointerCurrentCol = 0;
+            }
+        }
+    }
+
+    private void updateTextFlowAfterCursorMove(){
+        // Lógica para reflejar la posición del cursor en la interfaz (p. ej., selección de texto)
+        // Aquí podrías agregar algún indicador visual en la posición actual del cursor si fuera necesario
+        // Por ejemplo, podrías resaltar la línea actual o mover una barra vertical que represente el cursor
+    }
+
+    // Método para manejar las teclas presionadas y actualizar el contenido
     private void handleKeyPress(String character) {
         if (!character.equals("\n") && !character.equals("\r")) {
-            currentLineText += character;
-            updateCurrentLine();
-        } else {
-            codeLines.addLine(currentLineText);
-            textFlow.getChildren().add(new Text(currentLineText + "\n"));
-            currentLineText = ""; // Reiniciar el texto de la línea para la siguiente línea
-            currentLineIndex++;
-        }
-    }
-
-    private void handleMoveCursor(KeyCode code) {
-    if (code == KeyCode.UP && pointerCurrentRow.prev != null) {
-        pointerCurrentRow = pointerCurrentRow.prev;
-        pointerCurrentCol = Math.min(pointerCurrentCol, pointerCurrentRow.line.length());
-    } else if (code == KeyCode.DOWN && pointerCurrentRow.next != null) {
-        pointerCurrentRow = pointerCurrentRow.next;
-        pointerCurrentCol = Math.min(pointerCurrentCol, pointerCurrentRow.line.length());
-    } else if (code == KeyCode.LEFT) {
-        if (pointerCurrentCol > 0) {
-            pointerCurrentCol--;
-        } else if (pointerCurrentRow.prev != null) {
-            pointerCurrentRow = pointerCurrentRow.prev;
-            pointerCurrentCol = pointerCurrentRow.line.length();
-        }
-    } else if (code == KeyCode.RIGHT) {
-        if (pointerCurrentCol < pointerCurrentRow.line.length()) {
+            pointerCurrentRow.line = pointerCurrentRow.line.substring(0, pointerCurrentCol)
+                    + character
+                    + pointerCurrentRow.line.substring(pointerCurrentCol);
             pointerCurrentCol++;
-        } else if (pointerCurrentRow.next != null) {
+        } else {
+            String newLine = pointerCurrentRow.line.substring(pointerCurrentCol);
+            pointerCurrentRow.line = pointerCurrentRow.line.substring(0, pointerCurrentCol);
+            codeLines.insertAfter(pointerCurrentRow, newLine);
             pointerCurrentRow = pointerCurrentRow.next;
             pointerCurrentCol = 0;
         }
-    }
+        updateCurrentLineInTextFlow();
     }
 
+    // Método para actualizar la línea actual en el TextFlow
+    private void updateCurrentLineInTextFlow() {
+        int lineIndex = getLineIndex(pointerCurrentRow);
+        Text currentTextNode = (Text) textFlow.getChildren().get(lineIndex);
+        currentTextNode.setText(pointerCurrentRow.line);
+    }
 
-    // Actualiza la línea actual en el TextFlow
-    private void updateCurrentLine() {
-        if (currentLineIndex < textFlow.getChildren().size()) {
-            Text currentTextNode = (Text) textFlow.getChildren().get(currentLineIndex);
-            currentTextNode.setText(currentLineText);
-        } else {
-            textFlow.getChildren().add(new Text(currentLineText));
+    // Método para obtener el índice de una línea en el TextFlow basado en el nodo
+    private int getLineIndex(CodeNode node) {
+        int index = 0;
+        CodeNode current = codeLines.head;
+        while (current != null) {
+            if (current == node) {
+                return index;
+            }
+            index++;
+            current = current.next;
         }
+        return -1;  // Si no se encuentra (lo que no debería suceder)
     }
 
     public void setCodigo(String code) {
