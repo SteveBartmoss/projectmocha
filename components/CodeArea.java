@@ -18,6 +18,9 @@ public class CodeArea {
         
         // Inicializar las líneas de código
         initializeCodeLines(code);
+
+        this.pointerCurrentRow = codeLines.head;
+        this.pointerCurrentCol = 0;
         
         // Renderizar el contenido inicial
         renderTextFlow();
