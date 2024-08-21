@@ -1,3 +1,5 @@
+package datastructure;
+
 public class CodeLinkedList {
     CodeNode head;
     CodeNode tail;
