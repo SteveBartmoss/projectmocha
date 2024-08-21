@@ -25,7 +25,7 @@ public class FileManager {
 
   }
 
-  public String abrirArchivoLinked(File archivo) throws IOException{
+  public String abrirArchivo(File archivo) throws IOException{
 
     if(archivo == null || !archivo.exists() || !archivo.canRead()){
       throw new IOException("El archivo no existe o no se puede leer: "+ archivo.getName());
@@ -36,7 +36,6 @@ public class FileManager {
       String line;
       while((line = br.readLine())!=null){
         sb.append(line).append("\n");
-        codeLines.addLine(line);
       }
       return sb.toString();
     }
@@ -48,7 +47,7 @@ public class FileManager {
 
   }
 
-  public CodeLinkedList  abrirArchivo(File archivo) throws IOException{
+  public CodeLinkedList  abrirArchivoLinked(File archivo) throws IOException{
     
 
     if(archivo == null || !archivo.exists() || !archivo.canRead()){
@@ -57,6 +56,7 @@ public class FileManager {
 
     try(BufferedReader br = new BufferedReader(new FileReader(archivo))){
       CodeLinkedList codeLines = new CodeLinkedList();
+      String line;
       while((line = br.readLine())!=null){
         codeLines.addLine(line);
       }
