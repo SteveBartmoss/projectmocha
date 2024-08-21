@@ -40,6 +40,7 @@ import java.io.IOException;
 import filemanager.FileManager;
 import components.About;
 import components.FileWindow;
+import components.CodeArea;
 
 public class ProjectMocha extends Application{
 
@@ -80,7 +81,10 @@ public class ProjectMocha extends Application{
 
         Menu fileMenu = new Menu("Archivo");
         //Menu editMenu = new Menu("Editar");
+        Menu pruebaMenu = new Menu("Prueba");
         Menu helpMenu = new Menu("Ayuda");
+
+        MenuItem pruebaCode = new MenuItem("Prueba Code");
 
         MenuItem newFile = new MenuItem("Nuevo");
         MenuItem openFile = new MenuItem("Abrir");
@@ -89,12 +93,26 @@ public class ProjectMocha extends Application{
 
         MenuItem about = new MenuItem("About");
 
-
         fileMenu.getItems().addAll(newFile, openFile, saveFile, exit);
+        pruebaMenu.getItems.addAll(pruebaCode);
         helpMenu.getItems().addAll(about);
 
         //menuBar.getMenus().addAll(fileMenu, editMenu, helpMenu);
         menuBar.getMenus().addAll(fileMenu, helpMenu);
+
+        pruebaCode.setOnAction(event->{
+            Tab tab1 = new Tab("Prueba");
+
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Abrir Archivo");
+
+            archivo = fileChooser.showOpenDialog(primaryStage);
+
+            CodeArea codeArea = CodeArea.createCodeArea(fileManager.abrirArchivo(archivo));
+
+            tab1.setContent(codeArea.getTextFlow());
+            tabPane.getTabs().add(tab1);
+        });
 
         newFile.setOnAction(e ->{
             Tab newTab = FileWindow.createTab(archivo, fileManager);
