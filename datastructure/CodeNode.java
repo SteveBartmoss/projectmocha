@@ -1,3 +1,5 @@
+package datastructure;
+
 public class CodeNode {
     String line;
     int lineNumber; // Número de línea
