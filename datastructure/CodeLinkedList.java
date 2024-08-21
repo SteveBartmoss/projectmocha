@@ -1,9 +1,9 @@
 package datastructure;
 
 public class CodeLinkedList {
-    CodeNode head;
-    CodeNode tail;
-    private int lineCount = 0; // Contador de líneas
+    public CodeNode head;
+    public CodeNode tail;
+    public int lineCount = 0; // Contador de líneas
 
     public CodeLinkedList() {
         this.head = null;
