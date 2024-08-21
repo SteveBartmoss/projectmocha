@@ -10,6 +10,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import filemanager.CodeLinkedList;
+
 public class FileManager {
 
   public void guardarArchivo(File archivo, String contenido) throws IOException {
@@ -24,8 +26,6 @@ public class FileManager {
   }
 
   public String abrirArchivo(File archivo) throws IOException{
-
-    CodeLinkedList codeLines = new CodeLinkedList();
 
     if(archivo == null || !archivo.exists() || !archivo.canRead()){
       throw new IOException("El archivo no existe o no se puede leer: "+ archivo.getName());
@@ -46,6 +46,29 @@ public class FileManager {
       return null;
     }
 
+  }
+
+  public CodeLinkedList  abrirArchivo(File archivo) throws IOException{
+    
+
+    if(archivo == null || !archivo.exists() || !archivo.canRead()){
+      throw new IOException("El archivo no existe o no se puede leer: "+ archivo.getName());
+    }
+
+    try(BufferedReader br = new BufferedReader(new FileReader(archivo))){
+      CodeLinkedList codeLines = new CodeLinkedList();
+      while((line = br.readLine())!=null){
+        codeLines.addLine(line);
+      }
+
+      return codeLines;
+    }
+    catch(IOException ex){
+      System.out.println("Error al leer archivo: " + ex.getMessage());
+      showErrorDialog("No se pudo abrir el archivo","Ocurrió un error al abrir el archivo: " + archivo.getName(), ex.getMessage());
+      return null;
+    }
+    
   }
 
   private void showErrorDialog(String title, String name, String message){
