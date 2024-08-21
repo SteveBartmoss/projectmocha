@@ -1,15 +1,20 @@
 package components;
 
+import java.io.File;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
 import filemanager.FileManager;
-import filemanager.CodeLinkedList;
+import datastructure.CodeLinkedList;
+import datastructure.CodeNode;
 
 public class CodeArea {
 
-    private FileManager fileManager = new FileManager();
+    //private FileManager fileManager = new FileManager();
 
     private String codigo;
     private CodeLinkedList codeLines = new CodeLinkedList();
@@ -47,7 +52,7 @@ public class CodeArea {
             keyCode code = event.getCode();
             moveCursor(code);
             updateTextFlowAfterCursorMove();
-        })
+        });
     }
 
     // Inicializa las líneas de código en la lista y el TextFlow
