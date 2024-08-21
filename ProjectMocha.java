@@ -108,7 +108,7 @@ public class ProjectMocha extends Application{
 
             archivo = fileChooser.showOpenDialog(primaryStage);
 
-            CodeArea codeArea = CodeArea.createCodeArea(fileManager.abrirArchivo(archivo));
+            CodeArea codeArea = CodeArea.createCodeArea(archivo);
 
             tab1.setContent(codeArea.getTextFlow());
             tabPane.getTabs().add(tab1);
