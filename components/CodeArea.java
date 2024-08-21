@@ -2,7 +2,12 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
+import filemanager.FileManager;
+import filemanager.CodeLinkedList;
+
 public class CodeArea {
+
+    private FileManager fileManager = new FileManager();
 
     private String codigo;
     private CodeLinkedList codeLines = new CodeLinkedList();
@@ -180,7 +185,7 @@ public class CodeArea {
         return this.textFlow;
     }
 
-    public static CodeArea createCodeArea(File archivo, FileManager fileManager) {
+    public static CodeArea createCodeArea(File archivo) {
         String code = fileManager.abrirArchivo(archivo);
         return new CodeArea(code);
     }
