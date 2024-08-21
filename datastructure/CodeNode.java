@@ -1,10 +1,10 @@
 package datastructure;
 
 public class CodeNode {
-    String line;
-    int lineNumber; // Número de línea
-    CodeNode next;
-    CodeNode prev;
+    public String line;
+    public int lineNumber; // Número de línea
+    public CodeNode next;
+    public CodeNode prev;
 
     public CodeNode(String line, int lineNumber) {
         this.line = line;
