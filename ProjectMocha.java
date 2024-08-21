@@ -94,7 +94,7 @@ public class ProjectMocha extends Application{
         MenuItem about = new MenuItem("About");
 
         fileMenu.getItems().addAll(newFile, openFile, saveFile, exit);
-        pruebaMenu.getItems.addAll(pruebaCode);
+        pruebaMenu.getItems().addAll(pruebaCode);
         helpMenu.getItems().addAll(about);
 
         //menuBar.getMenus().addAll(fileMenu, editMenu, helpMenu);
