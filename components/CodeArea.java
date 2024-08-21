@@ -1,3 +1,5 @@
+package components;
+
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
