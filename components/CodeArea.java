@@ -1,6 +1,8 @@
 package components;
 
 import java.io.File;
+import java.io.IOException;
+
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
@@ -192,8 +194,15 @@ public class CodeArea {
         return this.textFlow;
     }
 
-    public static CodeArea createCodeArea(File archivo) {
-        String code = fileManager.abrirArchivo(archivo);
-        return new CodeArea(code);
+    public static CodeArea createCodeArea(File archivo, FileManager fileManager) {
+        try {
+            String code = fileManager.abrirArchivo(archivo);
+            return new CodeArea(code);
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Manejar la excepción de manera apropiada, por ejemplo, devolviendo null o un objeto CodeArea vacío
+            return null;
+        }
     }
+
 }
