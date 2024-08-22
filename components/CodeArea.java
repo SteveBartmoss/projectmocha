@@ -49,8 +49,8 @@ public class CodeArea {
         });
 
         textFlow.addEventFilter(KeyEvent.KEY_PRESSED,event ->{
-            keyCode code = event.getCode();
-            moveCursor(code);
+            KeyCode codeKey = event.getCode();
+            moveCursor(codeKey);
             updateTextFlowAfterCursorMove();
         });
     }
@@ -128,7 +128,7 @@ public class CodeArea {
 
     private void updateTextFlowAfterCursorMove(){
         String currentCode = pointerCurrentRow.line;
-        char letra = currentCode.chartAr(pointerCurrentCol);
+        char letra = currentCode.charAt(pointerCurrentCol);
         pointerCurrentRow.line = currentCode + "<";
         updateCurrentLineInTextFlow();
         // Lógica para reflejar la posición del cursor en la interfaz (p. ej., selección de texto)
