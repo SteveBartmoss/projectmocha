@@ -38,6 +38,27 @@ public class CodeLinkedList {
         }
     }
 
+    public void clear() {
+        CodeNode current = head;
+        
+        // Desvincular todos los nodos
+        while (current != null) {
+            CodeNode nextNode = current.next;
+            
+            // Rompe las conexiones de los nodos
+            current.next = null;
+            current.prev = null;
+            
+            // Avanza al siguiente nodo
+            current = nextNode;
+        }
+        
+        // Restablecer la lista
+        head = null;
+        tail = null;
+        lineCount = 0;
+    }
+
     public int getLineCount() {
         return lineCount;
     }
