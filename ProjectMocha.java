@@ -98,7 +98,7 @@ public class ProjectMocha extends Application{
         helpMenu.getItems().addAll(about);
 
         //menuBar.getMenus().addAll(fileMenu, editMenu, helpMenu);
-        menuBar.getMenus().addAll(fileMenu, helpMenu);
+        menuBar.getMenus().addAll(fileMenu,pruebaMenu, helpMenu);
 
         pruebaCode.setOnAction(event->{
             Tab tab1 = new Tab("Prueba");
@@ -108,7 +108,7 @@ public class ProjectMocha extends Application{
 
             archivo = fileChooser.showOpenDialog(primaryStage);
 
-            CodeArea codeArea = CodeArea.createCodeArea(archivo);
+            CodeArea codeArea = CodeArea.createCodeArea(archivo, fileManager);
 
             tab1.setContent(codeArea.getTextFlow());
             tabPane.getTabs().add(tab1);
