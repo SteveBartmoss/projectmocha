@@ -43,6 +43,10 @@ public class CodeArea {
         
         // Renderizar el contenido inicial
         renderTextFlow();
+
+        textFlow.setOnMouseClicked(event -> {
+            textFlow.requestFocus();
+        });
         
         // Event listener para actualizar el contenido incrementando
         textFlow.addEventFilter(KeyEvent.KEY_TYPED, event -> {
@@ -131,7 +135,7 @@ public class CodeArea {
     private void updateTextFlowAfterCursorMove(){
         String currentCode = pointerCurrentRow.line;
         char letra = currentCode.charAt(pointerCurrentCol);
-        pointerCurrentRow.line = currentCode + "<";
+        //pointerCurrentRow.line = currentCode + "<";
         updateCurrentLineInTextFlow();
         // Lógica para reflejar la posición del cursor en la interfaz (p. ej., selección de texto)
         // Aquí podrías agregar algún indicador visual en la posición actual del cursor si fuera necesario
