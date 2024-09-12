@@ -56,8 +56,14 @@ public class FileManager {
       StringBuilder sb = new StringBuilder();
       String line;
       while((line = br.readLine())!=null){
-        
+        codeLines.addLine(line);
       }
+      return;
+    }
+    catch(IOException ex){
+      System.out.printl("Error al leer archivo: "+ ex.getMessage());
+      showErrorDialog("No se pudo abrir el archivo","Ocurrio un error al abrir el archivo: " + archivo.getName(), ex.getMessage());
+      return;
     }
   }
 
