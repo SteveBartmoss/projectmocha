@@ -5,6 +5,14 @@ opcion nativa y de codigo abierto para la comunidad
 
 ### Change Log
 
+# Mocha Editor 1.10.0 (onDevelop) 15/09/204
+
+Se esta implementando un nuevo componente para dibujar el codigo del archivo sin la ayuda de un text area ya que la misma no soporta cosas como coloreado de sintaxis, auto completado y cosas asi, por eso se esta implementando un componente custom para trabajar con el codigo.
+
+La base es usar un elemento textFlow de javafx para que se llene con elementos text que presentan el codigo, se implemento una lista ligada para almacenar el codigo de un archivo la cual es la clase CodeLinkedList y se tiene la clase CodeNode, esto deberia mejorar el almacenamiento del archivo. 
+
+Actualmente el componente codeArea esta muy basico ya que apenas deja abrir el archivo, obtener el codigo del archivo y escribir pero solo en la primera linea de texto, aun falta mucho para que funcione como una texteArea.
+
 # Mocha Editor 1.5.0 (onDevelop) 18/08/2024
 
 Se agrego la posibilidad de abrir diferentes archivos desde el editor, ahora se muestran los archivos 
