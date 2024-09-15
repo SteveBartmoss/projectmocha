@@ -19,7 +19,7 @@ public class CodeArea {
     //private FileManager fileManager = new FileManager();
 
     private String codigo;
-    private static CodeLinkedList codeLines = new CodeLinkedList();
+    private CodeLinkedList codeLines = new CodeLinkedList();
     private TextFlow textFlow;
     private int currentLineIndex = 0; // Puntero a la línea actual
     private String currentLineText = ""; // Texto de la línea actual
@@ -28,12 +28,18 @@ public class CodeArea {
 
     private Rectangle cursor;
 
-    public CodeArea(String code) {
+    public CodeArea(String code, File archivo, FileManager fileManager) {
         this.textFlow = new TextFlow();
         this.codigo = code;
         
         // Inicializar las líneas de código
         //initializeCodeLines(code);
+        try{
+            fileManager.leerArchivo(archivo, this.codeLines);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        
 
         cursor = new Rectangle(1,15, Color.BLACK);
         textFlow.getChildren().add(cursor);
@@ -201,8 +207,8 @@ public class CodeArea {
     public static CodeArea createCodeArea(File archivo, FileManager fileManager) {
         try {
             String code = fileManager.abrirArchivo(archivo);
-            fileManager.leerArchivo(archivo,codeLines);
-            return new CodeArea(code);
+            //fileManager.leerArchivo(archivo,codeLines);
+            return new CodeArea(code,archivo,fileManager);
         } catch (IOException e) {
             e.printStackTrace();
             // Manejar la excepción de manera apropiada, por ejemplo, devolviendo null o un objeto CodeArea vacío
