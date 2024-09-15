@@ -48,7 +48,7 @@ public class FileManager {
   }
 
   public void leerArchivo(File archivo, CodeLinkedList codeLines) throws IOException {
-    if(archivo == null || !archivo.exist() || !archivo.canRead()){
+    if(archivo == null || !archivo.exists() || !archivo.canRead()){
       throw new IOException("El archivo no existe o no se puede leer: "+ archivo.getName());
     }
 
@@ -61,7 +61,7 @@ public class FileManager {
       return;
     }
     catch(IOException ex){
-      System.out.printl("Error al leer archivo: "+ ex.getMessage());
+      System.out.println("Error al leer archivo: "+ ex.getMessage());
       showErrorDialog("No se pudo abrir el archivo","Ocurrio un error al abrir el archivo: " + archivo.getName(), ex.getMessage());
       return;
     }
