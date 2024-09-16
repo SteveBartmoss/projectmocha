@@ -70,6 +70,9 @@ public class CodeArea {
                 moveCursor(codeKey);
                 updateTextFlowAfterCursorMove();
             }
+
+            event.consume();
+            
         });
         
         // Event listener para actualizar el contenido incrementando
@@ -119,6 +122,9 @@ public class CodeArea {
     }
 
     private void moveCursor(KeyCode code) {
+
+        textFlow.requestFocus();
+
         if (code == KeyCode.UP && pointerCurrentRow.prev != null) {
             pointerCurrentRow = pointerCurrentRow.prev;
             pointerCurrentCol = Math.min(pointerCurrentCol, pointerCurrentRow.line.length());
@@ -141,7 +147,9 @@ public class CodeArea {
             }
         }
 
-        updateCursorPosition();
+        //updateCursorPosition();
+        System.out.println(pointerCurrentCol);
+        System.out.println(pointerCurrentRow.line);
     }
 
     private void updateCursorPosition() {
@@ -183,8 +191,6 @@ public class CodeArea {
             pointerCurrentCol = 0;
         }
         updateCurrentLineInTextFlow();
-        System.out.println(pointerCurrentCol);
-        System.out.println(pointerCurrentRow.line);
     }
 
     private void handleRemoveText(){
