@@ -53,9 +53,20 @@ public class CodeArea {
         textFlow.setOnMouseClicked(event -> {
             textFlow.requestFocus();
         });
+
+        textFlow.addEventFilter(KeyEvent.KEY_PRESSED, event ->{
+            KeyCode codeKey = event.getCode();
+            String character = event.getText();
+            if(!character.isEmpty()){
+                handleKeyPress(character);
+            }else{
+                moveCursor(codeKey);
+                updateTextFlowAfterCursorMove();
+            }
+        });
         
         // Event listener para actualizar el contenido incrementando
-        textFlow.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+        /*textFlow.addEventFilter(KeyEvent.KEY_TYPED, event -> {
             String character = event.getCharacter();
             handleKeyPress(character);
         });
@@ -64,7 +75,7 @@ public class CodeArea {
             KeyCode codeKey = event.getCode();
             moveCursor(codeKey);
             updateTextFlowAfterCursorMove();
-        });
+        });*/
     }
 
     // Inicializa las líneas de código en la lista y el TextFlow
