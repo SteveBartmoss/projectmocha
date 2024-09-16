@@ -30,6 +30,7 @@ public class CodeArea {
 
     public CodeArea(String code, File archivo, FileManager fileManager) {
         this.textFlow = new TextFlow();
+        //this.textFlow.getStyleClass().add("code-area-text");
         this.codigo = code;
         
         // Inicializar las líneas de código
@@ -103,7 +104,9 @@ public class CodeArea {
         textFlow.getChildren().clear();
         CodeNode current = codeLines.head;
         while (current != null) {
-            textFlow.getChildren().add(new Text(current.line + "\n"));
+            Text textNode = new Text(current.line + "\n");
+            textNode.setFill(Color.WHITE);
+            textFlow.getChildren().add(textNode);
             current = current.next;
         }
         updateCursorPosition();
