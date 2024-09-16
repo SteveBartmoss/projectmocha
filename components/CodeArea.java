@@ -58,7 +58,13 @@ public class CodeArea {
         textFlow.addEventFilter(KeyEvent.KEY_PRESSED, event ->{
             KeyCode codeKey = event.getCode();
             String character = event.getText();
-            if(!character.isEmpty()){
+            if(codeKey == KeyCode.BACK_SPACE){
+                handleRemoveText();
+            }
+            else if(codeKey == KeyCode.DELETE){
+                handleRemoveText();
+            }
+            else if(!character.isEmpty()){
                 handleKeyPress(character);
             }else{
                 moveCursor(codeKey);
@@ -175,6 +181,18 @@ public class CodeArea {
             codeLines.insertAfter(pointerCurrentRow, newLine);
             pointerCurrentRow = pointerCurrentRow.next;
             pointerCurrentCol = 0;
+        }
+        updateCurrentLineInTextFlow();
+        System.out.println(pointerCurrentCol);
+        System.out.println(pointerCurrentRow.line);
+    }
+
+    private void handleRemoveText(){
+        if (pointerCurrentCol > 0) {
+            // Elimina el carácter justo antes del cursor
+            pointerCurrentRow.line = pointerCurrentRow.line.substring(0, pointerCurrentCol - 1) 
+                                 + pointerCurrentRow.line.substring(pointerCurrentCol);
+            pointerCurrentCol--;  // Mueve el cursor hacia atrás
         }
         updateCurrentLineInTextFlow();
     }
