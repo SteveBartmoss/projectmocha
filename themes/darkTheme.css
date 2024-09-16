@@ -90,3 +90,7 @@
 .tab-label {
     -fx-text-fill: #ffffff; /* Color blanco para el texto en las pestañas */
 }
+
+.code-area-text {
+    -fx-fill: white; /* Establecer el color del texto a blanco */
+}
