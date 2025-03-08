@@ -148,8 +148,6 @@ public class CodeArea {
         }
 
         //updateCursorPosition();
-        System.out.println(pointerCurrentCol);
-        System.out.println(pointerCurrentRow.line);
     }
 
     private void updateCursorPosition() {
